@@ -47,54 +47,54 @@ void Figura::inicialitzaFigura()
 {
 	switch (m_tipusFigura)
 	{
-		case FIGURA_O:
-			m_matriuFigura[0][0] = true;
-			m_matriuFigura[0][1] = true;
-			m_matriuFigura[1][0] = true;
-			m_matriuFigura[1][1] = true;
-			break;
-		case FIGURA_I:
-			m_matriuFigura[1][0] = true;
-			m_matriuFigura[1][1] = true;
-			m_matriuFigura[1][2] = true;
-			m_matriuFigura[1][3] = true;
-			break;
-		case FIGURA_T:
-			m_matriuFigura[0][1] = true;
-			m_matriuFigura[1][0] = true;
-			m_matriuFigura[1][1] = true;
-			m_matriuFigura[1][2] = true;
-			break;
-		case FIGURA_L:
-			m_matriuFigura[0][1] = true;
-			m_matriuFigura[1][1] = true;
-			m_matriuFigura[2][1] = true;
-			m_matriuFigura[2][2] = true;
-			break;
-		case FIGURA_J:
-			m_matriuFigura[0][1] = true;
-			m_matriuFigura[1][1] = true;
-			m_matriuFigura[2][0] = true;
-			m_matriuFigura[2][1] = true;
-			break;
-		case FIGURA_Z:
-			m_matriuFigura[0][0] = true;
-			m_matriuFigura[0][1] = true;
-			m_matriuFigura[1][1] = true;
-			m_matriuFigura[1][2] = true;
-			break;
-		case FIGURA_S:
-			m_matriuFigura[0][1] = true;
-			m_matriuFigura[0][2] = true;
-			m_matriuFigura[1][0] = true;
-			m_matriuFigura[1][1] = true;
-			break;
+			case FIGURA_O:
+		m_matriuFigura[0][0] = m_color;
+		m_matriuFigura[0][1] = m_color;
+		m_matriuFigura[1][0] = m_color;
+		m_matriuFigura[1][1] = m_color;
+		break;
+	case FIGURA_I:
+		m_matriuFigura[1][0] = m_color;
+		m_matriuFigura[1][1] = m_color;
+		m_matriuFigura[1][2] = m_color;
+		m_matriuFigura[1][3] = m_color;
+		break;
+	case FIGURA_T:
+		m_matriuFigura[0][1] = m_color;
+		m_matriuFigura[1][0] = m_color;
+		m_matriuFigura[1][1] = m_color;
+		m_matriuFigura[1][2] = m_color;
+		break;
+	case FIGURA_L:
+		m_matriuFigura[0][1] = m_color;
+		m_matriuFigura[1][1] = m_color;
+		m_matriuFigura[2][1] = m_color;
+		m_matriuFigura[2][2] = m_color;
+		break;
+	case FIGURA_J:
+		m_matriuFigura[0][1] = m_color;
+		m_matriuFigura[1][1] = m_color;
+		m_matriuFigura[2][0] = m_color;
+		m_matriuFigura[2][1] = m_color;
+		break;
+	case FIGURA_Z:
+		m_matriuFigura[0][0] = m_color;
+		m_matriuFigura[0][1] = m_color;
+		m_matriuFigura[1][1] = m_color;
+		m_matriuFigura[1][2] = m_color;
+		break;
+	case FIGURA_S:
+		m_matriuFigura[0][1] = m_color;
+		m_matriuFigura[0][2] = m_color;
+		m_matriuFigura[1][0] = m_color;
+		m_matriuFigura[1][1] = m_color;
+		break;
 	}
 }
 
 void Figura::transposarFigura()
 {
-	bool transposada[MAX_ALCADA][MAX_AMPLADA];
+	ColorFigura transposada[MAX_ALCADA][MAX_AMPLADA];
 
 	for (int i = 0; i < m_mida; ++i) {
 		for (int j = 0; j < m_mida; ++j) {
@@ -112,7 +112,7 @@ void Figura::transposarFigura()
 
 void Figura::invertirFigura(DireccioGir gir)
 {	
-	bool invertir[MAX_ALCADA][MAX_AMPLADA];
+	ColorFigura invertir[MAX_ALCADA][MAX_AMPLADA];
 
 	if (m_gir = GIR_HORARI)
 	{
