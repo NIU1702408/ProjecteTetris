@@ -17,18 +17,29 @@ Tauler::Tauler(ColorFigura tauler[MAX_FILA][MAX_FILA])
 bool Tauler::esMovimentValid(Figura figura, int fila, int columna)
 {
     bool esValid = true;
+    int esquerra = 0, dreta = 0, amunt = 0, avall = 0;
+    int i = 0, j = 0;
 
-    if (fila < 0 || columna < 0 || fila + figura.getMida() > MAX_FILA || columna + figura.getMida() > MAX_COL) {
+    //se tiene que revisar, supongo que midaFigura devuelve 4 variables con posiciones respecto el punto medio de la figura
+    figura.midaFigura(esquerra, dreta, amunt, avall); 
+
+    //comprueva si colisiona con los limites del tauler
+    if (fila - avall < 0 || columna - esquerra < 0 || fila + amunt > MAX_FILA || columna + dreta > MAX_COL)
         esValid = false;
-    }
 
     // Comprobar si la figura colisiona con otras figuras en el tauler
-    for (int i = 0; i < figura.getMida(); ++i)
-        for (int j = 0; j < figura[0].size(); ++j)
-            if (figura[i][j] != 0 && tauler[fila + i][columna + j] != 0)
+    while (i < MAX_ALCADA && esValid)
+    {
+        while (j < MAX_AMPLADA && esValid)
+        {
+            if (figura.getMatriu(i, j) && m_tauler[fila - esquerra + i][columna - amunt + j] != COLOR_NEGRE)
                 esValid = false;
-
-    return true;
+            j++;
+        }
+        i++;
+    }
+            
+    return esValid;
 }
 
 
@@ -60,7 +71,14 @@ void Tauler::eliminarFilesCompletades()
 	}
 }
 
-void Tauler::collocarFigura()
+void Tauler::collocarFigura(Figura figura) //colloco figura a la posicio guardada, no comprovo si es valid
 {
+	int esquerra = 0, dreta = 0, amunt = 0, avall = 0;
 
+	//se tiene que revisar, supongo que medidaFigura devuelve 4 variables con posiciones respecto el punto medio de la figura
+	figura.midaFigura(esquerra, dreta, amunt, avall);
+
+	for (int i = 0; i < MAX_ALCADA; i++)
+		for (int j = 0; i < MAX_AMPLADA; j++)
+			m_tauler[m_fila - esquerra + i][m_columna - amunt + j] = figura.getColor();
 }
