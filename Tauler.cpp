@@ -35,24 +35,29 @@ bool Tauler::esMovimentValid(Figura figura, int fila, int columna)
 void Tauler::eliminarFilesCompletades()
 {
     // Buscar las filas completadas
-    for (int i = 0; i < files; ++i) {
-        bool completa = true;
-        for (int j = 0; j < columnes; ++j) {
-            if (tauler[i][j] == 0) {
-                completa = false;
-                break;
-            }
-        }
-        if (completa) {
-            filesCompletades.push_back(i);
-        }
-    }
-
-    // Eliminar las filas completadas y añadir nuevas filas vacías arriba
-    for (int fila : filesCompletades) {
-        tauler.erase(tauler.begin() + fila);
-        tauler.insert(tauler.begin(), std::vector<int>(columnes, 0));
-    }
+	for (int i = 0; i < MAX_FILA; ++i)
+	{
+	    bool completa = true;
+	    int j = 0;
+	
+	    while (j < MAX_COL && completa)
+	    {
+	        if (m_tauler[i][j] == 0) {
+	            completa = false;
+	        }
+	    }
+	    
+	    if (completa)
+	    {
+	        for (int fila = i; fila < MAX_FILA; ++fila )
+	            for (int k = 0; k < MAX_COL; ++k)
+	                m_tauler[fila][k] = m_tauler[fila - 1][k];
+	
+	        for (int k = 0; k < MAX_COL; ++k)
+	            m_tauler[0][k] = COLOR_NEGRE;
+	    }
+	
+	}
 }
 
 void Tauler::collocarFigura()
