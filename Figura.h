@@ -45,8 +45,6 @@ public:
     TipusFigura getTipus() const { return m_tipusFigura; }
     ColorFigura getColor() const { return m_color; }
     int getMida() const { return m_mida; }
-    bool getMatriu(const int& i, const int& j) const { return m_matriuFigura[i][j]; }
-    int getPosicio(const int& i) const { return m_posicio[i]; }
     void transposarFigura();
     void invertirFigura();
 
@@ -56,8 +54,7 @@ private:
     TipusFigura m_tipusFigura;
     ColorFigura m_color;
     int m_mida;
-    bool m_matriuFigura[MAX_ALCADA][MAX_AMPLADA];
-    int m_posicio[];
+    ColorFigura m_matriuFigura[MAX_ALCADA][MAX_AMPLADA];
 
 };
 
