@@ -12,7 +12,7 @@ public:
 	Tauler(ColorFigura tauler[MAX_FILA][MAX_FILA]);
 	bool esMovimentValid(Figura figura, int fila, int columna);
 	void eliminarFilesCompletades();
-	void collocarFigura();
+	void collocarFigura(Figura figura);
 private:
 	int m_fila;
 	int m_columna;
