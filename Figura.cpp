@@ -96,21 +96,33 @@ void Figura::transposarFigura()
 {
 	bool transposada[MAX_ALCADA][MAX_AMPLADA];
 
-	for (int i = 0; i < MAX_ALCADA; ++i) {
-		for (int j = 0; j < MAX_AMPLADA; ++j) {
+	for (int i = 0; i < m_mida; ++i) {
+		for (int j = 0; j < m_mida; ++j) {
 			transposada[j][i] = m_matriuFigura[i][j];
 		}
 	}
 
-	for (int i = 0; i < MAX_ALCADA; ++i) {
-		for (int j = 0; j < MAX_AMPLADA; ++j) {
+	for (int i = 0; i < m_mida; ++i) {
+		for (int j = 0; j < m_mida; ++j) {
 			m_matriuFigura[i][j] = transposada[i][j];
 		}
 	}
 
 }
 
-void Figura::invertirFigura()
-{
+void Figura::invertirFigura(DireccioGir gir)
+{	
+	bool invertir[MAX_ALCADA][MAX_AMPLADA];
+
+	if (m_gir = GIR_HORARI)
+	{
+		for (int i = 0; i < m_mida; ++i)
+			for (int j = 0; j < m_mida; ++j)
+				invertir[i][j] = m_matriuFigura[i][m_mida-1-j];
+	}
+	else
+		for (int i = 0; i < m_mida; ++i)
+			for (int j = 0; j < m_mida; ++j)
+				invertir[i][j] = m_matriuFigura[m_mida-1-i][j];
 
 }
