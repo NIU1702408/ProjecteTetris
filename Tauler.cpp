@@ -2,83 +2,94 @@
 
 Tauler::Tauler()
 {
-	for(int i = 0; i < MAX_FILA; i++)
-		for (int j = 0; j < MAX_FILA; j++)
-			m_tauler[i][j] = NO_COLOR;
+	for (int i = 0; i < MAX_FILA_TAULER; i++)
+		for (int j = 0; j < MAX_FILA_TAULER; j++)
+			m_tauler[i][j] = COLOR_NEGRE;
 }
 
-Tauler::Tauler(ColorFigura tauler[MAX_FILA][MAX_FILA])
+Tauler::Tauler(ColorFigura tauler[MAX_FILA_TAULER][MAX_FILA_TAULER])
 {
-	for (int i = 0; i < MAX_FILA; i++)
-		for (int j = 0; j < MAX_FILA; j++)
+	for (int i = 0; i < MAX_FILA_TAULER; i++)
+		for (int j = 0; j < MAX_FILA_TAULER; j++)
 			m_tauler[i][j] = tauler[i][j];
 }
 
-bool Tauler::esMovimentValid(Figura figura, int fila, int columna)
+bool Tauler::posicioValida(const Posicio& pos) const 
 {
-    bool esValid = true;
-    int esquerra = 0, dreta = 0, amunt = 0, avall = 0;
-    int i = 0, j = 0;
+	bool esValid = true;
 
-    //se tiene que revisar, supongo que midaFigura devuelve 4 variables con posiciones respecto el punto medio de la figura
-    figura.midaFigura(esquerra, dreta, amunt, avall); 
+	if (0 > pos.x > MAX_COL_TAULER || 0 > pos.y )
+		esValid = false;
+	else
+	{
+		if (m_tauler[pos.x][pos.y] != COLOR_NEGRE)
+			esValid = false;
+	}
 
-    //comprueva si colisiona con los limites del tauler
-    if (fila - avall < 0 || columna - esquerra < 0 || fila + amunt > MAX_FILA || columna + dreta > MAX_COL)
-        esValid = false;
+	return esValid;
+}
 
-    // Comprobar si la figura colisiona con otras figuras en el tauler
-    while (i < MAX_ALCADA && esValid)
-    {
-        while (j < MAX_AMPLADA && esValid)
-        {
-            if (figura.getMatriu(i, j) && m_tauler[fila - esquerra + i][columna - amunt + j] != COLOR_NEGRE)
-                esValid = false;
-            j++;
-        }
-        i++;
-    }
-            
-    return esValid;
+bool Tauler::esMovimentValid(const Figura& figura,const Posicio& pos) const
+{
+	bool esValid = true;
+	int i = 0, j = 0;
+
+	while (i < figura.getMida() && esValid)
+	{
+		while (j < figura.getMida() && esValid)
+		{
+			if (figura.getFigura(i, j) != NO_COLOR)
+			{
+				Posicio pos_tmp;
+				pos_tmp.x = pos.x + i;
+				pos_tmp.y = pos.y - j;
+
+				esValid = posicioValida(pos_tmp);
+			}
+			j++;
+		}
+		i++;
+	}
+
+	return esValid;
 }
 
 
 void Tauler::eliminarFilesCompletades()
 {
-    // Buscar las filas completadas
-	for (int i = 0; i < MAX_FILA; ++i)
+	// Buscar las filas completadas
+	for (int i = 0; i < MAX_FILA_TAULER; ++i)
 	{
-	    bool completa = true;
-	    int j = 0;
-	
-	    while (j < MAX_COL && completa)
-	    {
-	        if (m_tauler[i][j] == 0) {
-	            completa = false;
-	        }
-	    }
-	    
-	    if (completa)
-	    {
-	        for (int fila = i; fila < MAX_FILA; ++fila )
-	            for (int k = 0; k < MAX_COL; ++k)
-	                m_tauler[fila][k] = m_tauler[fila - 1][k];
-	
-	        for (int k = 0; k < MAX_COL; ++k)
-	            m_tauler[0][k] = COLOR_NEGRE;
-	    }
-	
+		bool completa = true;
+		int j = 0;
+
+		while (j < MAX_COL_TAULER && completa)
+		{
+			if (m_tauler[i][j] == 0) {
+				completa = false;
+			}
+		}
+
+		if (completa)
+		{
+			for (int fila = i; fila < MAX_FILA_TAULER; ++fila)
+				for (int k = 0; k < MAX_COL_TAULER; ++k)
+					m_tauler[fila][k] = m_tauler[fila - 1][k];
+
+			for (int k = 0; k < MAX_COL_TAULER; ++k)
+				m_tauler[0][k] = COLOR_NEGRE;
+		}
+
 	}
 }
 
-void Tauler::collocarFigura(Figura figura) //colloco figura a la posicio guardada, no comprovo si es valid
+void Tauler::collocarFigura( Figura figura,const Posicio& pos) // no comprovo si es valid
 {
-	int esquerra = 0, dreta = 0, amunt = 0, avall = 0;
-
-	//se tiene que revisar, supongo que medidaFigura devuelve 4 variables con posiciones respecto el punto medio de la figura
-	figura.midaFigura(esquerra, dreta, amunt, avall);
-
-	for (int i = 0; i < MAX_ALCADA; i++)
-		for (int j = 0; i < MAX_AMPLADA; j++)
-			m_tauler[m_fila - esquerra + i][m_columna - amunt + j] = figura.getColor();
+	for (int i = 0; i < figura.getMida(); i++)
+		for (int j = 0; i < figura.getMida(); j++)
+		{
+			if (figura.getFigura(i, j) != NO_COLOR)
+				m_tauler[pos.x + i][pos.y - j] = figura.getColor();
+		}
+	figura.setPosicio(pos);
 }
