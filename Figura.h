@@ -57,24 +57,20 @@ public:
     Figura();
     Figura(TipusFigura figura, ColorFigura color);
       
-    TipusFigura getTipus() const { return m_tipusFigura; }
     ColorFigura getColor() const { return m_color; }
-    void getMatriuFigura(ColorFigura m[MAX_AMPLADA][MAX_ALCADA]) const;
     int getMida() const { return m_mida; }
-    bool getFigura(int x, int y) const { return m_figura[x][y]; }
-    void setFigura(int x, int y, bool valor) { m_figura[x][y] = valor; }
+    ColorFigura getFigura(const int& x,const int& y) const { return m_figura[x][y]; }
+    void setPosicio(const Posicio& pos) { m_posicio = pos; }
     
-
-    void girar(DireccioGir gir);
+    void girar(const DireccioGir& gir);
     void baixar();
-    void desplaçar(SentitDesplaçament sentit);
-    // Tal vez falte una funcion para recuperar la formma actual de la figura¿
+    void desplaçar(const SentitDesplaçament& sentit);
 private:
     TipusFigura m_tipusFigura;
     ColorFigura m_color;
     Posicio m_posicio;
     int m_mida;
-    bool m_figura[MAX_AMPLADA][MAX_ALCADA];
+    ColorFigura m_figura[MAX_AMPLADA][MAX_ALCADA];
 
 };
 
