@@ -1,5 +1,18 @@
+
 #ifndef FIGURA_H
 #define FIGURA_H
+
+const int MAX_ALCADA = 4;
+const int MAX_AMPLADA = 4;
+
+const int MAX_FILA_TAULER = 8;
+const int MAX_COL_TAULER = 8;
+
+typedef struct
+{
+    int x;
+    int y;
+} Posicio;
 
 typedef enum
 {
@@ -14,7 +27,6 @@ typedef enum
     NO_COLOR
 } ColorFigura;
 
-
 typedef enum
 {
     NO_FIGURA = 0,
@@ -27,37 +39,42 @@ typedef enum
     FIGURA_S,
 } TipusFigura;
 
-const int MAX_ALCADA = 4;
-const int MAX_AMPLADA = 4;
-
 typedef enum
 {
     GIR_HORARI = 0,
     GIR_ANTI_HORARI
 } DireccioGir;
 
+typedef enum
+{
+    DRETA = 0,
+    ESQUERRA
+} SentitDesplaçament;
+
 class Figura
 {
 public:
     Figura();
     Figura(TipusFigura figura, ColorFigura color);
-
+      
     TipusFigura getTipus() const { return m_tipusFigura; }
     ColorFigura getColor() const { return m_color; }
+    void getMatriuFigura(ColorFigura m[MAX_AMPLADA][MAX_ALCADA]) const;
     int getMida() const { return m_mida; }
-    bool getMatriu(const int& i, const int& j) const { return m_matriuFigura[i][j]; }
-    int getPosicio(const int& i) const { return m_posicio[i]; }
-    void transposarFigura();
-    void invertirFigura();
+    bool getFigura(int x, int y) const { return m_figura[x][y]; }
+    void setFigura(int x, int y, bool valor) { m_figura[x][y] = valor; }
+    
 
+    void girar(DireccioGir gir);
+    void baixar();
+    void desplaçar(SentitDesplaçament sentit);
+    // Tal vez falte una funcion para recuperar la formma actual de la figura¿
 private:
-    void inicialitzaFigura();
-
     TipusFigura m_tipusFigura;
     ColorFigura m_color;
+    Posicio m_posicio;
     int m_mida;
-    bool m_matriuFigura[MAX_ALCADA][MAX_AMPLADA];
-    int m_posicio[];
+    bool m_figura[MAX_AMPLADA][MAX_ALCADA];
 
 };
 
