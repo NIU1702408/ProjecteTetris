@@ -21,10 +21,8 @@ bool Tauler::posicioValida(const Posicio& pos) const
 	if (0 > pos.x > MAX_COL_TAULER || 0 > pos.y )
 		esValid = false;
 	else
-	{
 		if (m_tauler[pos.x][pos.y] != COLOR_NEGRE)
 			esValid = false;
-	}
 
 	return esValid;
 }
@@ -87,9 +85,7 @@ void Tauler::collocarFigura( Figura figura,const Posicio& pos) // no comprovo si
 {
 	for (int i = 0; i < figura.getMida(); i++)
 		for (int j = 0; i < figura.getMida(); j++)
-		{
 			if (figura.getFigura(i, j) != NO_COLOR)
 				m_tauler[pos.x + i][pos.y - j] = figura.getColor();
-		}
 	figura.setPosicio(pos);
 }
