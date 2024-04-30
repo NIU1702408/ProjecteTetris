@@ -14,11 +14,10 @@ Figura::Figura()
 
 }
 
-Figura::Figura(TipusFigura tipusFigura, ColorFigura color)
+Figura::Figura(TipusFigura tipusFigura)
 {
 	m_mida = 0;
 	m_tipusFigura = tipusFigura;
-	m_color = color;
 	m_posicio.x = 0;
 	m_posicio.y = MAX_FILA_TAULER;
 
@@ -30,6 +29,7 @@ Figura::Figura(TipusFigura tipusFigura, ColorFigura color)
 	{
 	case FIGURA_O:
 		m_mida = 2;
+		m_color = COLOR_GROC;
 		m_figura[0][0] = COLOR_GROC;
 		m_figura[0][1] = COLOR_GROC;
 		m_figura[1][0] = COLOR_GROC;
@@ -37,6 +37,7 @@ Figura::Figura(TipusFigura tipusFigura, ColorFigura color)
 		break;
 	case FIGURA_I:
 		m_mida = 4;
+		m_color = COLOR_BLAUCEL;
 		m_figura[1][0] = COLOR_BLAUCEL;
 		m_figura[1][1] = COLOR_BLAUCEL;
 		m_figura[1][2] = COLOR_BLAUCEL;
@@ -44,6 +45,7 @@ Figura::Figura(TipusFigura tipusFigura, ColorFigura color)
 		break;
 	case FIGURA_T:
 		m_mida = 3;
+		m_color = COLOR_MAGENTA;
 		m_figura[0][1] = COLOR_MAGENTA;
 		m_figura[1][0] = COLOR_MAGENTA;
 		m_figura[1][1] = COLOR_MAGENTA;
@@ -51,6 +53,7 @@ Figura::Figura(TipusFigura tipusFigura, ColorFigura color)
 		break;
 	case FIGURA_L:
 		m_mida = 3;
+		m_color = COLOR_TARONJA;
 		m_figura[0][1] = COLOR_TARONJA;
 		m_figura[1][1] = COLOR_TARONJA;
 		m_figura[2][1] = COLOR_TARONJA;
@@ -58,6 +61,7 @@ Figura::Figura(TipusFigura tipusFigura, ColorFigura color)
 		break;
 	case FIGURA_J:
 		m_mida = 3;
+		m_color = COLOR_BLAUFOSC;
 		m_figura[0][1] = COLOR_BLAUFOSC;
 		m_figura[1][1] = COLOR_BLAUFOSC;
 		m_figura[2][0] = COLOR_BLAUFOSC;
@@ -65,6 +69,7 @@ Figura::Figura(TipusFigura tipusFigura, ColorFigura color)
 		break;
 	case FIGURA_Z:
 		m_mida = 3;
+		m_color = COLOR_VERMELL;
 		m_figura[0][0] = COLOR_VERMELL;
 		m_figura[0][1] = COLOR_VERMELL;
 		m_figura[1][1] = COLOR_VERMELL;
@@ -72,6 +77,79 @@ Figura::Figura(TipusFigura tipusFigura, ColorFigura color)
 		break;
 	case FIGURA_S:
 		m_mida = 3;
+		m_color = COLOR_VERD;
+		m_figura[0][1] = COLOR_VERD;
+		m_figura[0][2] = COLOR_VERD;
+		m_figura[1][0] = COLOR_VERD;
+		m_figura[1][1] = COLOR_VERD;
+		break;
+	}
+}
+
+void Figura::incialitza (TipusFigura tipusFigura)
+{
+	m_mida = 0;
+	m_tipusFigura = tipusFigura;
+	m_posicio.x = 0;
+	m_posicio.y = MAX_FILA_TAULER;
+
+	for (int i = 0; i < MAX_ALCADA; i++)
+		for (int j = 0; j < MAX_AMPLADA; j++)
+			m_figura[i][j] = NO_COLOR;
+
+	switch (m_tipusFigura)
+	{
+	case FIGURA_O:
+		m_mida = 2;
+		m_color = COLOR_GROC;
+		m_figura[0][0] = COLOR_GROC;
+		m_figura[0][1] = COLOR_GROC;
+		m_figura[1][0] = COLOR_GROC;
+		m_figura[1][1] = COLOR_GROC;
+		break;
+	case FIGURA_I:
+		m_mida = 4;
+		m_color = COLOR_BLAUCEL;
+		m_figura[1][0] = COLOR_BLAUCEL;
+		m_figura[1][1] = COLOR_BLAUCEL;
+		m_figura[1][2] = COLOR_BLAUCEL;
+		m_figura[1][3] = COLOR_BLAUCEL;
+		break;
+	case FIGURA_T:
+		m_mida = 3;
+		m_color = COLOR_MAGENTA;
+		m_figura[0][1] = COLOR_MAGENTA;
+		m_figura[1][0] = COLOR_MAGENTA;
+		m_figura[1][1] = COLOR_MAGENTA;
+		m_figura[1][2] = COLOR_MAGENTA;
+		break;
+	case FIGURA_L:
+		m_mida = 3;
+		m_color = COLOR_TARONJA;
+		m_figura[0][1] = COLOR_TARONJA;
+		m_figura[1][1] = COLOR_TARONJA;
+		m_figura[2][1] = COLOR_TARONJA;
+		m_figura[2][2] = COLOR_TARONJA;
+		break;
+	case FIGURA_J:
+		m_mida = 3;
+		m_color = COLOR_BLAUFOSC;
+		m_figura[0][1] = COLOR_BLAUFOSC;
+		m_figura[1][1] = COLOR_BLAUFOSC;
+		m_figura[2][0] = COLOR_BLAUFOSC;
+		m_figura[2][1] = COLOR_BLAUFOSC;
+		break;
+	case FIGURA_Z:
+		m_mida = 3;
+		m_color = COLOR_VERMELL;
+		m_figura[0][0] = COLOR_VERMELL;
+		m_figura[0][1] = COLOR_VERMELL;
+		m_figura[1][1] = COLOR_VERMELL;
+		m_figura[1][2] = COLOR_VERMELL;
+		break;
+	case FIGURA_S:
+		m_mida = 3;
+		m_color = COLOR_VERD;
 		m_figura[0][1] = COLOR_VERD;
 		m_figura[0][2] = COLOR_VERD;
 		m_figura[1][0] = COLOR_VERD;
@@ -111,22 +189,22 @@ void Figura::girar(const DireccioGir& gir)
 			m_figura[i][j] = invertir[i][j];
 }
 
-void Figura::baixar()
+void Figura::baixar(const int& dirY)
 {
-	if (m_posicio.y > 0)
-		m_posicio.y--;
+	if (dirY == -1)
+		if (m_posicio.y < MAX_ALCADA)
+			m_posicio.y++;
+	else
+		if (m_posicio.y > 0)
+			m_posicio.y--;
 }
 
-void Figura::desplaçar(const SentitDesplaçament& sentit)
+void Figura::desplaçar(const int& dirX)
 {
-	if (sentit == ESQUERRA)
-	{
+	if (dirX == -1)
 		if (m_posicio.x > 0)
-			m_posicio.x++;
-	}
+			m_posicio.x--;
 	else
-	{
 		if (m_posicio.x < MAX_COL_TAULER)
 			m_posicio.x++;
-	}
 }
