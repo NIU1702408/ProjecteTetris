@@ -7,6 +7,8 @@ const int MAX_AMPLADA = 4;
 
 const int MAX_FILA_TAULER = 8;
 const int MAX_COL_TAULER = 8;
+const int MAX_FILA = 8;
+const int MAX_COL = 8;
 
 typedef struct
 {
@@ -45,34 +47,28 @@ typedef enum
     GIR_ANTI_HORARI
 } DireccioGir;
 
-typedef enum
-{
-    DRETA = 0,
-    ESQUERRA
-} SentitDesplaçament;
-
 class Figura
 {
 public:
     Figura();
-    Figura(TipusFigura figura, ColorFigura color);
+    Figura(TipusFigura figura);
       
     ColorFigura getColor() const { return m_color; }
     int getMida() const { return m_mida; }
     ColorFigura getFigura(const int& x,const int& y) const { return m_figura[x][y]; }
+    Posicio getPosicio() const { return m_posicio; }
     void setPosicio(const Posicio& pos) { m_posicio = pos; }
     
+    void incialitza(TipusFigura figura);
     void girar(const DireccioGir& gir);
-    void baixar();
-    void desplaçar(const SentitDesplaçament& sentit);
+    void baixar(const int& dirY);
+    void desplaçar(const int& dirX);
 private:
     TipusFigura m_tipusFigura;
     ColorFigura m_color;
     Posicio m_posicio;
     int m_mida;
     ColorFigura m_figura[MAX_AMPLADA][MAX_ALCADA];
-
 };
-
 
 #endif
