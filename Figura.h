@@ -1,8 +1,8 @@
 #ifndef FIGURA_H
 #define FIGURA_H
 
-const int MAX_FILA = 4;
-const int MAX_COL = 4;
+const int MAX_FILA = 8;
+const int MAX_COL = 8;
 
 const int MAX_FILA_TAULER = 8;
 const int MAX_COL_TAULER = 8;
@@ -59,8 +59,8 @@ public:
     ColorFigura getColor() const { return m_color; }
     int getMida() const { return m_mida; }
     ColorFigura getFigura(const int& x, const int& y) const { return m_figura[x][y]; }
-    void setPosicio(const Posicio& pos) { m_posicio = pos; }
     Posicio getPosicio() const { return m_posicio; }
+    void setPosicio(const Posicio& pos) { m_posicio = pos; }
 
     void girar(const DireccioGir& gir);
     void baixar();
