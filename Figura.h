@@ -1,6 +1,15 @@
 #ifndef FIGURA_H
 #define FIGURA_H
 
+const int MAX_ALCADA = 4;
+const int MAX_AMPLADA = 4;
+
+typedef struct
+{
+    int vertical;
+    int horitzontal;
+} Posicio;
+
 typedef enum
 {
     COLOR_NEGRE = 0,
@@ -14,7 +23,6 @@ typedef enum
     NO_COLOR
 } ColorFigura;
 
-
 typedef enum
 {
     NO_FIGURA = 0,
@@ -27,9 +35,6 @@ typedef enum
     FIGURA_S,
 } TipusFigura;
 
-const int MAX_ALCADA = 4;
-const int MAX_AMPLADA = 4;
-
 typedef enum
 {
     GIR_HORARI = 0,
@@ -40,26 +45,24 @@ class Figura
 {
 public:
     Figura();
-    Figura(TipusFigura figura, ColorFigura color);
-
-    TipusFigura getTipus() const { return m_tipusFigura; }
+    Figura(TipusFigura figura);
+      
     ColorFigura getColor() const { return m_color; }
     int getMida() const { return m_mida; }
-    bool getMatriu(const int& i, const int& j) const { return m_matriuFigura[i][j]; }
-    int getPosicio(const int& i) const { return m_posicio[i]; }
-    void transposarFigura();
-    void invertirFigura();
-
+    ColorFigura getFigura(const int& x,const int& y) const { return m_figura[x][y]; }
+    Posicio getPosicio() const { return m_posicio; }
+    void setPosicio(const Posicio& pos) { m_posicio = pos; }
+    
+    void incialitza(TipusFigura figura);
+    void girar(const DireccioGir& gir);
+    void baixar(const int& dirY);
+    void desplacar(const int& dirX);
 private:
-    void inicialitzaFigura();
-
     TipusFigura m_tipusFigura;
     ColorFigura m_color;
+    Posicio m_posicio;
     int m_mida;
-    bool m_matriuFigura[MAX_ALCADA][MAX_AMPLADA];
-    int m_posicio[];
+    ColorFigura m_figura[MAX_ALCADA][MAX_AMPLADA];
 
 };
-
-
 #endif
