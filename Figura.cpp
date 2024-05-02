@@ -1,12 +1,12 @@
-#include "figura.h"
+#include "Figura.h"
 
 Figura::Figura()
 {
 	m_mida = 0;
 	m_color = NO_COLOR;
 	m_tipusFigura = NO_FIGURA;
-	m_posicio.x = 0;
-	m_posicio.y = MAX_FILA_TAULER;
+	m_posicio.vertical = 0;
+	m_posicio.horitzontal = 0;
 
 	for (int i = 0; i < MAX_ALCADA; i++)
 		for (int j = 0; j < MAX_AMPLADA; j++)
@@ -18,8 +18,8 @@ Figura::Figura(TipusFigura tipusFigura)
 {
 	m_mida = 0;
 	m_tipusFigura = tipusFigura;
-	m_posicio.x = 0;
-	m_posicio.y = MAX_FILA_TAULER;
+	m_posicio.vertical = 0;
+	m_posicio.horitzontal = 0;
 
 	for (int i = 0; i < MAX_ALCADA; i++)
 		for (int j = 0; j < MAX_AMPLADA; j++)
@@ -90,8 +90,8 @@ void Figura::incialitza (TipusFigura tipusFigura)
 {
 	m_mida = 0;
 	m_tipusFigura = tipusFigura;
-	m_posicio.x = 0;
-	m_posicio.y = MAX_FILA_TAULER;
+	m_posicio.vertical = 0;
+	m_posicio.horitzontal = 0;
 
 	for (int i = 0; i < MAX_ALCADA; i++)
 		for (int j = 0; j < MAX_AMPLADA; j++)
@@ -126,18 +126,18 @@ void Figura::incialitza (TipusFigura tipusFigura)
 	case FIGURA_L:
 		m_mida = 3;
 		m_color = COLOR_TARONJA;
-		m_figura[0][1] = COLOR_TARONJA;
+		m_figura[0][2] = COLOR_TARONJA;
+		m_figura[1][0] = COLOR_TARONJA;
 		m_figura[1][1] = COLOR_TARONJA;
-		m_figura[2][1] = COLOR_TARONJA;
-		m_figura[2][2] = COLOR_TARONJA;
+		m_figura[1][2] = COLOR_TARONJA;
 		break;
 	case FIGURA_J:
 		m_mida = 3;
 		m_color = COLOR_BLAUFOSC;
-		m_figura[0][1] = COLOR_BLAUFOSC;
+		m_figura[0][0] = COLOR_BLAUFOSC;
+		m_figura[1][0] = COLOR_BLAUFOSC;
 		m_figura[1][1] = COLOR_BLAUFOSC;
-		m_figura[2][0] = COLOR_BLAUFOSC;
-		m_figura[2][1] = COLOR_BLAUFOSC;
+		m_figura[1][2] = COLOR_BLAUFOSC;
 		break;
 	case FIGURA_Z:
 		m_mida = 3;
@@ -192,19 +192,15 @@ void Figura::girar(const DireccioGir& gir)
 void Figura::baixar(const int& dirY)
 {
 	if (dirY == -1)
-		if (m_posicio.y < MAX_ALCADA)
-			m_posicio.y++;
+		m_posicio.vertical--;
 	else
-		if (m_posicio.y > 0)
-			m_posicio.y--;
+		m_posicio.vertical++;
 }
 
-void Figura::desplaçar(const int& dirX)
+void Figura::desplacar(const int& dirX)
 {
 	if (dirX == -1)
-		if (m_posicio.x > 0)
-			m_posicio.x--;
+		m_posicio.horitzontal--;
 	else
-		if (m_posicio.x < MAX_COL_TAULER)
-			m_posicio.x++;
+		m_posicio.horitzontal++;
 }
