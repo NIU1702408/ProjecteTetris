@@ -10,7 +10,7 @@ using namespace std;
 class Joc
 {
 public:
-	Joc() { m_posicio.x = 0; m_posicio.y = 0; }
+	Joc() { m_posicio.vertical = 0; m_posicio.horitzontal = 0; }
 	void inicialitza(const string& nomFitxer);
 	bool giraFigura(DireccioGir direccio);
 	bool mouFigura(int dirX);
