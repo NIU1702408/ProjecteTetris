@@ -5,6 +5,7 @@ void Joc::inicialitza(const string& nomFitxer)
 	Posicio posicio;
 	int tipus, gir;
 	ifstream fitxer;
+	m_figuraCollocada = false;
 
 	fitxer.open(nomFitxer);
 
@@ -14,17 +15,9 @@ void Joc::inicialitza(const string& nomFitxer)
 		m_figura.incialitza(TipusFigura(tipus));
 
 		fitxer >> posicio.vertical >> posicio.horitzontal;
-		if (m_figura.getMida() == 3)
-		{
-			posicio.vertical--;
-			posicio.horitzontal--;
-		}
-		else
-			if (m_figura.getMida() == 4)
-			{
-				posicio.horitzontal -= 2;
-				posicio.vertical--;
-			}
+
+		posicio.vertical--;
+		posicio.horitzontal--;
 
 		m_figura.setPosicio(posicio);
 		m_posicio = posicio;
@@ -93,6 +86,7 @@ int Joc::baixaFigura()
 	{
 		m_figura.baixar(-1);
 		m_tauler.collocarFigura(m_figura, m_figura.getPosicio());
+		m_figuraCollocada = true;
 		nFiles = m_tauler.eliminarFilesCompletades();
 	}
 	else
@@ -110,14 +104,16 @@ void Joc::escriuTauler(const string& nomFitxer)
 
 	if (fitxer.is_open())
 	{
-		m_tauler.collocarFigura(m_figura, m_posicio);
+		if (!m_figuraCollocada)
+			m_tauler.collocarFigura(m_figura, m_posicio);
 		for (int i = 0; i < MAX_COL; i++)
 		{
 			for (int j = 0; j < MAX_FILA; j++)
 				fitxer << int(m_tauler.getTauler(i, j)) << " ";
 			fitxer << endl;
 		}
-		m_tauler.eliminarFigura(m_figura, m_posicio);
+		if(!m_figuraCollocada)
+			m_tauler.eliminarFigura(m_figura, m_posicio);
 		fitxer.close();
 	}
 }
