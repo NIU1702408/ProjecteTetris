@@ -18,11 +18,13 @@ bool Tauler::posicioValida(const Posicio& pos) const
 {
 	bool esValid = true;
 
-	if (0 > pos.horitzontal > MAX_FILA || pos.vertical > MAX_COL )
+	if (0 > pos.horitzontal || pos.horitzontal >= MAX_FILA || pos.vertical >= MAX_COL )
 		esValid = false;
 	else
+	{
 		if (m_tauler[pos.vertical][pos.horitzontal] != COLOR_NEGRE)
 			esValid = false;
+	}
 
 	return esValid;
 }
@@ -30,10 +32,11 @@ bool Tauler::posicioValida(const Posicio& pos) const
 bool Tauler::esMovimentValid(const Figura& figura,const Posicio& pos) const
 {
 	bool esValid = true;
-	int i = 0, j = 0;
+	int i = 0;
 
 	while (i < figura.getMida() && esValid)
 	{
+		int j = 0;
 		while (j < figura.getMida() && esValid)
 		{
 			if (figura.getFigura(i, j) != NO_COLOR)
@@ -68,12 +71,13 @@ int Tauler::eliminarFilesCompletades()
 			if (m_tauler[i][j] == 0) {
 				completa = false;
 			}
+			j++;
 		}
 
 		if (completa)
 		{
 			nCompletades++;
-			for (int fila = i; fila < MAX_FILA; ++fila)
+			for (int fila = i; fila > 0; --fila)
 				for (int k = 0; k < MAX_COL; ++k)
 					m_tauler[fila][k] = m_tauler[fila - 1][k];
 
