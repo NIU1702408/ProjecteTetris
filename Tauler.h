@@ -2,21 +2,21 @@
 #define TAULER_H
 #include "Figura.h"
 
-const int MAX_FILA = 8;
-const int MAX_COL = 8;
-
 class Tauler
 {
 public:
 	Tauler();
-	Tauler(ColorFigura tauler[MAX_FILA][MAX_FILA]);
-	bool esMovimentValid(Figura figura, int fila, int columna);
-	void eliminarFilesCompletades();
-	void collocarFigura();
-private:
-	int m_fila;
-	int m_columna;
-	ColorFigura m_tauler[MAX_FILA][MAX_FILA];
+	Tauler(ColorFigura tauler[MAX_FILA_TAULER][MAX_FILA_TAULER]);
 
+	ColorFigura getTauler(const int& x, const int& y) const { return m_tauler[x][y]; }
+	void setTauler(ColorFigura color, int posX, int posY) { m_tauler[posX][posY] = color; }
+
+	bool esMovimentValid(const Figura& figura,const Posicio& pos) const;
+	void eliminarFilesCompletades();
+	void collocarFigura(Figura figura,const Posicio& pos);
+private:
+	bool posicioValida(const Posicio& pos) const;
+
+	ColorFigura m_tauler[MAX_FILA_TAULER][MAX_FILA_TAULER];
 };
 #endif
