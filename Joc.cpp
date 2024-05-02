@@ -16,22 +16,27 @@ void Joc::inicialitza(const string& nomFitxer)
 		fitxer >> posicio.x >> posicio.y;
 		m_figura.setPosicio(posicio);
 		
+		
 		fitxer >> gir;
 		for (int i = 0; i < gir; i++)
 			m_figura.girar(GIR_HORARI);
 
-		for (int i = 0; i < MAX_FILA; i++)
-			for (int j = 0; j < MAX_COL; j++)
+		for (int i = 0; i < MAX_FILA_TAULER; i++)
+			for (int j = 0; j < MAX_COL_TAULER; j++)
 			{
 				int color;
 				fitxer >> color;
 
 				m_tauler.setTauler(ColorFigura(color), i, j);
 			}
-
+		
+		m_tauler.collocarFigura(m_figura, posicio);
+		
+		
 		fitxer.close();
 	}
 }
+
 
 bool Joc::giraFigura(DireccioGir direccio)
 {
@@ -115,9 +120,9 @@ void Joc::escriuTauler(const string& nomFitxer)
     
     if (fitxer.is_open())
     {
-    	for (int i = 0; i < MAX_FILA; i++)
+    	for (int i = 0; i < MAX_FILA_TAULER; i++)
     	{
-    		for (int j = 0; j < MAX_COL; j++)
+    		for (int j = 0; j < MAX_COL_TAULER; j++)
     			fitxer << m_tauler.getTauler(i, j);
 
     		fitxer << endl;
