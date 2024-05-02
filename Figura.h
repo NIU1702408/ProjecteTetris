@@ -1,19 +1,13 @@
-
 #ifndef FIGURA_H
 #define FIGURA_H
 
 const int MAX_ALCADA = 4;
 const int MAX_AMPLADA = 4;
 
-const int MAX_FILA_TAULER = 8;
-const int MAX_COL_TAULER = 8;
-const int MAX_FILA = 8;
-const int MAX_COL = 8;
-
 typedef struct
 {
-    int x;
-    int y;
+    int vertical;
+    int horitzontal;
 } Posicio;
 
 typedef enum
@@ -62,13 +56,13 @@ public:
     void incialitza(TipusFigura figura);
     void girar(const DireccioGir& gir);
     void baixar(const int& dirY);
-    void desplaçar(const int& dirX);
+    void desplacar(const int& dirX);
 private:
     TipusFigura m_tipusFigura;
     ColorFigura m_color;
     Posicio m_posicio;
     int m_mida;
-    ColorFigura m_figura[MAX_AMPLADA][MAX_ALCADA];
-};
+    ColorFigura m_figura[MAX_ALCADA][MAX_AMPLADA];
 
+};
 #endif
