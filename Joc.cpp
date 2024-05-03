@@ -1,5 +1,6 @@
 #include "Joc.h"
 
+//Inicialitza el joc a partir d'un fitxer passat per 
 void Joc::inicialitza(const string& nomFitxer)
 {
 	Posicio posicio;
@@ -11,6 +12,7 @@ void Joc::inicialitza(const string& nomFitxer)
 
 	if (fitxer.is_open())
 	{
+		//llegeix figura, posició (x,y), gir (posició de la figura), i el tauler amb els seus colors
 		fitxer >> tipus;
 		m_figura.incialitza(TipusFigura(tipus));
 
@@ -41,6 +43,7 @@ void Joc::inicialitza(const string& nomFitxer)
 	}
 }
 
+//gira la figura en la direcció especificada, verifica si el moviment és vàlid i ajusta la rotació de la figura en cas de que no ho sigui
 bool Joc::giraFigura(DireccioGir direccio)
 {
 	bool gira = true;
@@ -58,6 +61,7 @@ bool Joc::giraFigura(DireccioGir direccio)
 	return gira;
 }
 
+//mou la figura en la direcció especificada, verifica si la posició és vàlida i ajusta la rotació si no ho és
 bool Joc::mouFigura(int dirX)
 {
 	bool mou = true;
@@ -77,11 +81,13 @@ bool Joc::mouFigura(int dirX)
 	return mou;
 }
 
+//baixa la figura actual una fila
 int Joc::baixaFigura()
 {
 	int nFiles = 0;
 	m_figura.baixar(1);
 
+	//si el moviment no és vàlid, col·loca la figura en la posició actual i elimina les files completades i retorna nFiles (eliminades)
 	if (!m_tauler.esMovimentValid(m_figura, m_figura.getPosicio()))
 	{
 		m_figura.baixar(-1);
@@ -95,6 +101,7 @@ int Joc::baixaFigura()
 	return nFiles;
 }
 
+//escriu l'estat actual del tauler en un fitxer passat com a paràmetre
 void Joc::escriuTauler(const string& nomFitxer)
 {
 	int i, j;
@@ -104,14 +111,19 @@ void Joc::escriuTauler(const string& nomFitxer)
 
 	if (fitxer.is_open())
 	{
+		//si la figura encara no està col·locada, la col·loca temporament per escriure el tauler
 		if (!m_figuraCollocada)
 			m_tauler.collocarFigura(m_figura, m_posicio);
+
+		//s'escriu el tauler en el document
 		for (int i = 0; i < MAX_COL; i++)
 		{
 			for (int j = 0; j < MAX_FILA; j++)
 				fitxer << int(m_tauler.getTauler(i, j)) << " ";
 			fitxer << endl;
 		}
+
+		//s'elimina la figura que em col·locat temporalment
 		if(!m_figuraCollocada)
 			m_tauler.eliminarFigura(m_figura, m_posicio);
 		fitxer.close();
