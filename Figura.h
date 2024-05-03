@@ -58,11 +58,11 @@ public:
     void baixar(const int& dirY);
     void desplacar(const int& dirX);
 private:
-    TipusFigura m_tipusFigura;
+    TipusFigura m_tipusFigura; //forma de la figura
     ColorFigura m_color;
     Posicio m_posicio;
     int m_mida;
-    ColorFigura m_figura[MAX_ALCADA][MAX_AMPLADA];
+    ColorFigura m_figura[MAX_ALCADA][MAX_AMPLADA]; //matriu amb la forma de la figura i color
 
 };
 #endif
