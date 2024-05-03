@@ -1,5 +1,6 @@
 #include "Figura.h"
 
+//Constructor predeterminat de Figura, inicialitza totes les dades de la classe
 Figura::Figura()
 {
 	m_mida = 0;
@@ -14,17 +15,20 @@ Figura::Figura()
 
 }
 
+//Constructor que inicialitza una figura concreta (O,I,T...)
 Figura::Figura(TipusFigura tipusFigura)
 {
 	m_mida = 0;
 	m_tipusFigura = tipusFigura;
 	m_posicio.vertical = 0;
 	m_posicio.horitzontal = 0;
-
+	
+	//inicialitzem matriu de la figura
 	for (int i = 0; i < MAX_ALCADA; i++)
 		for (int j = 0; j < MAX_AMPLADA; j++)
 			m_figura[i][j] = NO_COLOR;
 
+	//configurem la mida i matriu de la figura segons el tipus
 	switch (m_tipusFigura)
 	{
 	case FIGURA_O:
@@ -86,6 +90,7 @@ Figura::Figura(TipusFigura tipusFigura)
 	}
 }
 
+//Inicialitza una figura com amb el constructor, però permet reinicialitzar una figura existent amb un nou tipus
 void Figura::incialitza (TipusFigura tipusFigura)
 {
 	m_mida = 0;
@@ -158,6 +163,7 @@ void Figura::incialitza (TipusFigura tipusFigura)
 	}
 }
 
+//gira la figura en la direccióGir (horaria o antihoraria)
 void Figura::girar(const DireccioGir& gir)
 {
 	ColorFigura transposada[MAX_ALCADA][MAX_AMPLADA];
@@ -172,7 +178,7 @@ void Figura::girar(const DireccioGir& gir)
 		for (int j = 0; j < m_mida; ++j)
 			m_figura[i][j] = transposada[i][j];
 
-	//Inverteix matriu
+	//Inverteix matriu segons la direcció de gir
 	if (gir == GIR_HORARI)
 	{
 		for (int i = 0; i < m_mida; ++i)
@@ -189,6 +195,7 @@ void Figura::girar(const DireccioGir& gir)
 			m_figura[i][j] = invertir[i][j];
 }
 
+//mou la figura cap avall, (si dirY = 1, baixa, sino puja), actualitza la posició vertical
 void Figura::baixar(const int& dirY)
 {
 	if (dirY == -1)
@@ -197,6 +204,7 @@ void Figura::baixar(const int& dirY)
 		m_posicio.vertical++;
 }
 
+//deplaça la figura cap a la dreta (dirX=1) o cap a l'esquerra (dirX=-1) actualitza la posició horitzontal
 void Figura::desplacar(const int& dirX)
 {
 	if (dirX == -1)
